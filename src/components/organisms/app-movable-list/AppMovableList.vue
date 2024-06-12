@@ -62,11 +62,7 @@ const actions = [
 ];
 
 const isActionDisabled = computed(() => {
-  const result = [];
-
-  for (let i = 0; i < props.modelValue.length; i++) {
-    result.push({});
-  }
+  const result = props.modelValue.map( () => { return {}});
 
   for (let i = 0; i < result.length; i++) {
     result[i].forwardAll = !props.modelValue[i].length;
