@@ -109,7 +109,7 @@ function handleSelect(subItem, listIndex) {
   selectedItemsIds.value[listIndex].push(subItem.id);
 }
 
-function moveForwardAll(actionItem, listIndex) {
+function moveForwardAll(listIndex) {
   if (virtualResult.value[listIndex+1]) {
     virtualResult.value[listIndex+1].push(...virtualResult.value[listIndex]);
     virtualResult.value[listIndex].splice(0, virtualResult.value[listIndex].length);
@@ -118,7 +118,7 @@ function moveForwardAll(actionItem, listIndex) {
   }
 }
 
-function moveForwardSelected(actionItem, listIndex) {
+function moveForwardSelected(listIndex) {
   if (selectedItemsIds.value[listIndex].length && selectedItemsIds.value[listIndex+1]) {
     virtualResult.value[listIndex+1]
         .push(
@@ -142,7 +142,7 @@ function moveForwardSelected(actionItem, listIndex) {
 
 }
 
-function backSelected(actionItem, listIndex) {
+function backSelected(listIndex) {
   virtualResult.value[listIndex]
       .push(
           ...virtualResult.value[listIndex+1]
@@ -163,7 +163,7 @@ function backSelected(actionItem, listIndex) {
   emit("update:modelValue", virtualResult);
 }
 
-function backAll(actionItem, listIndex) {
+function backAll(listIndex) {
   virtualResult.value[listIndex].push(...virtualResult.value[listIndex+1]);
   virtualResult.value[listIndex+1].splice(0, virtualResult.value[listIndex].length);
   selectedItemsIds.value[listIndex] = [];
@@ -173,22 +173,22 @@ function backAll(actionItem, listIndex) {
 function handleMove(actionItem, listIndex) {
   switch (actionItem.action) {
     case "forwardAll": {
-      moveForwardAll(actionItem, listIndex)
+      moveForwardAll(listIndex)
       break
     }
 
     case "moveForwardSelected": {
-      moveForwardSelected(actionItem, listIndex);
+      moveForwardSelected(listIndex);
       break
     }
 
     case "backSelected": {
-      backSelected(actionItem, listIndex);
+      backSelected(listIndex);
       break
     }
 
     case "backAll": {
-      backAll(actionItem, listIndex);
+      backAll(listIndex);
       break
     }
   }
